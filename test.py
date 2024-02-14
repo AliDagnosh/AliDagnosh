@@ -7,13 +7,14 @@ win_size = (1200, 600)
 window = pygame.display.set_mode(win_size)
 
 # الألوان
-WHITE = (255, 255, 255)
+WHITE = (220, 220, 220)
 BLACK = (0, 0, 0)
 GRAY = (200, 200, 200)
 
 # الخطوط
 font = pygame.font.Font(None, 32)
-
+back_ground= pygame.image.load("D.png")
+back_ground=pygame.transform.scale(back_ground, (1200, 600))
 # أزرار القائمة الرئيسية
 africa_button_rect =        pygame.Rect(100, 100, 200, 40)
 asia_button_rect =          pygame.Rect(100, 160, 200, 40)
@@ -309,7 +310,7 @@ while is_running:
             is_running = False
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if is_in_main_menu:
-                window.fill(WHITE)
+                window.blit(back_ground,(0,0))
                 if africa_button_rect.collidepoint(event.pos):
                     is_in_main_menu = False
                     is_in_options_menu = True
@@ -377,7 +378,7 @@ while is_running:
                     is_in_main_menu=True
     
     if is_in_main_menu:
-        window.fill(WHITE)
+        window.blit(back_ground,(0,0))
         # رسم أزرة القائمة الرئيسية
         pygame.draw.rect(window, GRAY, africa_button_rect, border_radius=25)
         pygame.draw.rect(window, GRAY, asia_button_rect, border_radius=25)
@@ -437,7 +438,7 @@ while is_running:
         # إنزلاق قائمة الخيارات من اليسار إلى الوسط
         #if options_menu_slide > 400:
         #    options_menu_slide -= 10
-        window.fill(WHITE)
+        window.blit(back_ground,(0,0))
         level1_button_rect.topleft = (100, 100)
         level2_button_rect.topleft = (100, 160)
         level3_button_rect.topleft = (100, 220)
@@ -473,7 +474,7 @@ while is_running:
         window.blit(back_text, (back_button_rect.centerx - back_text.get_width() // 2,
                                 back_button_rect.centery - back_text.get_height() // 2))
     else:
-        window.fill(WHITE)
+        window.blit(back_ground,(0,0))
         questions(continent,lvl)
         print_text()
         pygame.draw.rect(window, GRAY, main_menu_button_rect, border_radius=25)
@@ -483,7 +484,7 @@ while is_running:
         window.blit(btn_txt, (main_menu_button_rect.centerx - btn_txt.get_width() // 2,
                                  main_menu_button_rect.centery - btn_txt.get_height() // 2))
         
-
+    
     pygame.display.flip()
 
 pygame.quit()

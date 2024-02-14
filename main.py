@@ -422,7 +422,7 @@ def draw_result(time_is_over):
         in_result=True
          
         map_bg.blit(screen,0,0)
-        ##screen.fill((220, 220, 220))
+
         image_bg = pygame.image.load("btn_bg.png")
         screen.blit(image_bg, (120, 80)) 
 
@@ -454,6 +454,7 @@ def draw_result(time_is_over):
                 x_star.blit(screen,270,20)
                 x_star.blit(screen,360,20)
                 x_star.blit(screen,450,20)
+                loss_sound.play()
         print(similar_count)
         #text = font.render(result_text, True, BLACK)
         screen.blit(text, (190, 130))
@@ -1111,7 +1112,6 @@ button=Image("button.png",new_width-40, new_height-115)
 
 continue_img=Image("continuous.png",new_width-170, new_height-170)
 
-help_img=Image("help.png",50, 50)
 
 clock = pygame.time.Clock()
 
@@ -1269,7 +1269,6 @@ font = pygame.font.Font(None, 36)  # تعيين الخط وحجم النص
 
 score=0
 
-af_level = Image("af_level.png",screen_width,screen_height)
 def map():
     
     is_in_main_menu=False
@@ -1455,7 +1454,6 @@ is_in_options_menu = False
 clock = pygame.time.Clock()
 is_running = True
 
-image_effect = pygame.image.load("mouseup.png")
 def effect_mouse():
     # تحميل الصورة
     global image_effect
@@ -1474,7 +1472,6 @@ def effect_mouse():
     # إخفاء الصورة
     pygame.display.flip()
     pygame.display.update()
-#pygame.mouse.set_visible(False)
 Timer=0
 def Time_():
     x=67
@@ -1763,6 +1760,10 @@ while is_running:
         if start_button_rect.collidepoint(pygame.mouse.get_pos()):
             pygame.draw.rect(screen, GRAY, start_button_rect.inflate(10, 10), border_radius=25)
         if dictionary_button_rect.collidepoint(pygame.mouse.get_pos()):
+            if not done:
+                text_="You need to complete one of the levels to unlock the dictionary or\n enter the password"
+                comment = font.render(text_, True, WHITE)
+                screen.blit(comment, (20, 20))
             pygame.draw.rect(screen, GRAY, dictionary_button_rect.inflate(10, 10), border_radius=25)
         if quit_button_rect.collidepoint(pygame.mouse.get_pos()):
             pygame.draw.rect(screen, GRAY, quit_button_rect.inflate(10, 10), border_radius=25)
@@ -1779,7 +1780,6 @@ while is_running:
             lock.blit(screen,105,310)
 
     elif is_in_options_menu:
-        
         #effect_mouse()
         map_bg.blit(screen,0,0)
         # رسم أزرة قائمة الخيارات
@@ -1789,10 +1789,19 @@ while is_running:
         pygame.draw.rect(screen, GRAY, back_button_rect, border_radius=25)
 
         if level1_button_rect.collidepoint(pygame.mouse.get_pos()):
+            text_="In this level, simple questions about country capitals will be asked.\n Note: There is no time limit in this level"
+            comment = font.render(text_, True, WHITE)
+            screen.blit(comment, (20, 20))
             pygame.draw.rect(screen, GRAY, level1_button_rect.inflate(10, 10), border_radius=25)
         if level2_button_rect.collidepoint(pygame.mouse.get_pos()):
+            text_="In this level, questions about population and area of countries will\n be asked.\n Note: In this round, you have 24 seconds to complete the 9 questions,\n otherwise you will lose."
+            comment = font.render(text_, True, WHITE)
+            screen.blit(comment, (20, 20))
             pygame.draw.rect(screen, GRAY, level2_button_rect.inflate(10, 10), border_radius=25)
         if level3_button_rect.collidepoint(pygame.mouse.get_pos()):
+            text_="In this level, general questions about the continent will be asked.\nNote: In this round, you have 24 seconds to complete the 9 questions,\n otherwise you will lose."
+            comment = font.render(text_, True, WHITE)
+            screen.blit(comment, (20, 20))
             pygame.draw.rect(screen, GRAY, level3_button_rect.inflate(10, 10), border_radius=25)
         if back_button_rect.collidepoint(pygame.mouse.get_pos()):
             pygame.draw.rect(screen, GRAY, back_button_rect.inflate(10, 10), border_radius=25)
